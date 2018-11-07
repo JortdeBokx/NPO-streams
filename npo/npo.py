@@ -1,5 +1,26 @@
-import requests, re
+import requests, re, m3u8
 
+
+def get_live_m3u8(key, quality=0):
+    """
+    Get's the m3u8 object in the preferred quality
+    :param key: The key of the livestream, from streams.json
+    :param quality: an integer where lower = best quality. every 1 value higher means a lower quality
+    :return: an m3u8 object
+    """
+
+    m3u8_location = get_live_url(key)
+    print(m3u8_location)
+    if m3u8_location:
+        m3u8_obj = m3u8.load(m3u8_location)
+        Base_URI = m3u8_obj.base_uri
+
+        if m3u8_obj.is_variant:
+            for m3u8_playlist in m3u8_obj.playlists:
+                print(m3u8_playlist)
+        else:
+            # TODO: if no playlists then get stream instantly
+            pass
 
 def get_live_url(key):
     """
@@ -9,7 +30,6 @@ def get_live_url(key):
     """
 
     stream_data = get_stream_data(key)
-    print(stream_data)
     selected_stream = ""
     if stream_data:
         for streams in stream_data['items']:
@@ -21,7 +41,7 @@ def get_live_url(key):
             stream_url = requests.get(selected_stream).text
             stream_url = stream_url.split('"')[1]
             stream_url = re.sub(r"\\", '', stream_url)
-            print(stream_url)
+            return stream_url
 
 
 def get_stream_data(key):
@@ -38,4 +58,5 @@ def get_stream_data(key):
 
     return stream_data
 
-get_live_url("LI_NL1_4188102")
+
+get_live_m3u8("LI_NL1_4188102")
