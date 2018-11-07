@@ -1,23 +1,34 @@
 import requests, re, m3u8
 
 
-def get_live_m3u8(key, quality=0):
+def get_live_m3u8(key, quality=20):
     """
     Get's the m3u8 object in the preferred quality
     :param key: The key of the livestream, from streams.json
-    :param quality: an integer where lower = best quality. every 1 value higher means a lower quality
+    :param quality: an integer for the vertical amount of pixels, 0 for maximum quality
     :return: an m3u8 object
     """
 
     m3u8_location = get_live_url(key)
-    print(m3u8_location)
     if m3u8_location:
         m3u8_obj = m3u8.load(m3u8_location)
         Base_URI = m3u8_obj.base_uri
 
         if m3u8_obj.is_variant:
+            options = {}
             for m3u8_playlist in m3u8_obj.playlists:
-                print(m3u8_playlist)
+                resolution = m3u8_playlist.stream_info.resolution
+                if resolution:  # If we don't have the audio-only stream
+                    options[str(resolution[1])] = Base_URI + m3u8_playlist.uri
+
+            if quality == 0:
+                preferred_m3u8_url = options[str(max(options, key=int))]  # int refers to function int
+            else:
+                try:
+                    preferred_m3u8_url = options[str(quality)]
+                except KeyError:
+                    preferred_m3u8_url = options[str(min(options, key=int))]
+            return preferred_m3u8_url
         else:
             # TODO: if no playlists then get stream instantly
             pass
