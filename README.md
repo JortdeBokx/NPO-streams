@@ -18,5 +18,14 @@ TODO Documentation/github:
     * tvhproxy, 
     * github.com/kapersoft/npo
     * ffmpeg
-* maybe a todolist or something
+* maybe a future expansion or something
+    * easier installation
+        * Docker image
+        * pre compiled ffmpeg
+    * RTL and others
+    * auto-quality
+    * make it general for international usage
+        * only add configurations for where to find m3u8's
+        * sharing place for configurations
+     
 
