@@ -1,11 +1,14 @@
+import json
+from os import path
+
 import requests, re, m3u8
 
 
-def get_live_m3u8(key, quality=20):
+def get_live_m3u8(key, quality=0):
     """
     Get's the m3u8 object in the preferred quality
     :param key: The key of the livestream, from streams.json
-    :param quality: an integer for the vertical amount of pixels, 0 for maximum quality
+    :param quality: an integer for the vertical amount of pixels, 0 for maximum quality, invalid -> minimum quality
     :return: an m3u8 object
     """
 
@@ -33,6 +36,7 @@ def get_live_m3u8(key, quality=20):
             # TODO: if no playlists then get stream instantly
             pass
 
+
 def get_live_url(key):
     """
     Gets the Streaming url of the live stream identified by key
@@ -57,7 +61,7 @@ def get_live_url(key):
 
 def get_stream_data(key):
     """
-    Gets the stream Blob used to play the stream
+    Gets the stream Json
     :param key: The key of the livestream, from streams.json
     :return: Json object with stream data
     """
@@ -70,4 +74,26 @@ def get_stream_data(key):
     return stream_data
 
 
-get_live_m3u8("LI_NL1_4188102")
+def get_lineup(base_url):
+    """
+    Returns a JSON object with the channels, and where to get them, similar to HDHomerun
+    :param base_url: The base url for any streaming
+    :return:
+    """
+    lineup = []
+    basepath = path.dirname(__file__)
+    filepath = path.abspath(path.join(basepath, "streams.json"))
+    with open(filepath, 'r') as streams:
+        stream_json = json.load(streams)
+        for d in stream_json:
+            if d['enabled']:
+                url = base_url + "/" + d['key']
+                lineup.append({'GuideNumber': str(d['number']),
+                               'GuideName': d['name'],
+                               'URL': url
+                               })
+    return lineup
+
+
+if __name__ == "__main__":
+    print(get_live_m3u8("LI_NL1_4188102"))

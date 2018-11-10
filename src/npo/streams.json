@@ -1,0 +1,50 @@
+[
+  {
+    "number": 1,
+    "name": "NPO 1",
+    "key": "LI_NL1_4188102",
+    "enabled": true
+  },
+  {
+    "number": 2,
+    "name": "NPO 2",
+    "key": "LI_NL2_4188105",
+    "enabled": true
+  },
+  {
+    "number": 3,
+    "name": "NPO 3",
+    "key": "LI_NL3_4188107",
+    "enabled": true
+  },
+  {
+    "number": 127,
+    "name": "NPO 1 extra",
+    "key": "LI_NEDERLAND3_221687",
+    "enabled": true
+  },
+  {
+    "number": 128,
+    "name": "NPO 2 extra",
+    "key": "LI_NEDERLAND2_221679",
+    "enabled": true
+  },
+  {
+    "number": 129,
+    "name": "NPO 3 extra",
+    "key": "LI_NEDERLAND3_221683",
+    "enabled": true
+  },
+  {
+    "number": 501,
+    "name": "NPO nieuws",
+    "key": "LI_NEDERLAND1_221673",
+    "enabled": true
+  },
+  {
+    "number": 502,
+    "name": "NPO politiek",
+    "key": "LI_NEDERLAND1_221675",
+    "enabled": true
+  }
+]
