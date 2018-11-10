@@ -1,8 +1,10 @@
 # NPO streams
 
-Fetches the live video stream from Radio2, posting it as an hdhomerun proxy with EPG for use in emby and plex or other media software
+Fetches the live video stream from any NPO stream, posting it as an hdhomerun proxy with EPG for use in emby and plex or other media software
 
 TODO Documentation/github:
+
+**READ UP BEST GUIDE FOR OPEN SOURCE PROJECTS**
 * rename to NPOHeadend
 * explain what/why (proxy for emby/plex)
 * supported channels
@@ -16,3 +18,5 @@ TODO Documentation/github:
     * tvhproxy, 
     * github.com/kapersoft/npo
     * ffmpeg
+* maybe a todolist or something
+
