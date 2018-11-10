@@ -25,16 +25,16 @@ def get_live_m3u8(key, quality=0):
                     options[str(resolution[1])] = Base_URI + m3u8_playlist.uri
 
             if quality == 0:
-                preferred_m3u8_url = options[str(max(options, key=int))]  # int refers to function int
+                preferred_m3u8_url = options[str(max(options, key=int))]  # int refers to function int()
             else:
                 try:
                     preferred_m3u8_url = options[str(quality)]
                 except KeyError:
                     preferred_m3u8_url = options[str(min(options, key=int))]
+            print("Selected Quality: " + str(quality) + ". options:" + str(options))
             return preferred_m3u8_url
         else:
-            # TODO: if no playlists then get stream instantly
-            pass
+            return m3u8_obj.uri
 
 
 def get_live_url(key):
