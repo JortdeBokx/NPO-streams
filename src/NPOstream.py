@@ -35,6 +35,7 @@ def stream_stuff(key):
 
         stream_url = npo.get_live_m3u8(str(key), quality=0)
         ffmpeg_command = ["ffmpeg", "-i", stream_url, "-c:v", "copy", "-c:a", "copy", "-f", "mpegts",
+                          "-preset", "ultrafast",  "-tune", "zerolatency",
                           "-movflags", "faststart", "pipe:stdout"]
         process = subprocess.Popen(ffmpeg_command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, bufsize=-1)
 

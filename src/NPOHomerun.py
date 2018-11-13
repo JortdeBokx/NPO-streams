@@ -14,15 +14,3 @@ def create_app():
     return app
 
 
-if __name__ == '__main__':
-    config = {}
-    try:
-        basepath = path.dirname(__file__)
-        filepath = path.abspath(path.join(basepath, "config.json"))
-        config = json.load(open(filepath, 'r'))
-    except FileNotFoundError:
-        print("Error with configuration file, file not found")
-        exit(0)
-
-    app = create_app()
-    app.run(host=config["bindAddr"], port=config["port"])

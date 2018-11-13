@@ -1,7 +1,9 @@
 import json
 from os import path
 
-import requests, re, m3u8
+import m3u8
+import re
+import requests
 
 
 def get_live_m3u8(key, quality=0):
@@ -92,7 +94,3 @@ def get_lineup(base_url):
                                'URL': url
                                })
     return lineup
-
-
-if __name__ == "__main__":
-    print(get_live_m3u8("LI_NL1_4188102"))

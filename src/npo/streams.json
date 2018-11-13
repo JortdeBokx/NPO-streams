@@ -46,5 +46,29 @@
     "name": "NPO politiek",
     "key": "LI_NEDERLAND1_221675",
     "enabled": true
+  },
+   {
+    "number": 601,
+    "name": "Radio 1 Webcam",
+    "key": "LI_RADIO1_300877",
+    "enabled": true
+  },
+  {
+    "number": 602,
+    "name": "Radio 2 Webcam",
+    "key": "LI_RADIO2_300879",
+    "enabled": true
+  },
+   {
+    "number": 603,
+    "name": "3fm webcam",
+    "key": "LI_3FM_300881",
+    "enabled": true
+  },
+  {
+    "number": 604,
+    "name": "Radio 4 Webcam",
+    "key": "LI_RA4_698901",
+    "enabled": true
   }
 ]
