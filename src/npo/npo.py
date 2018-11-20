@@ -1,4 +1,5 @@
 import json
+import logging
 from os import path
 
 import m3u8
@@ -36,6 +37,8 @@ def get_live_m3u8(key, quality=0):
             return preferred_m3u8_url
         else:
             return m3u8_obj.uri
+    else:
+        return None
 
 
 def get_live_url(key):
@@ -58,6 +61,8 @@ def get_live_url(key):
             stream_url = stream_url.split('"')[1]
             stream_url = re.sub(r"\\", '', stream_url)
             return stream_url
+    else:
+        return None
 
 
 def get_stream_data(key):
@@ -66,12 +71,19 @@ def get_stream_data(key):
     :param key: The key of the livestream, from streams.json
     :return: Json object with stream data
     """
-    auth_token_json = requests.get('https://ida.omroep.nl/app.php/auth').json()
-    token = auth_token_json["token"]
-
-    data_url = 'https://ida.omroep.nl/app.php/' + key + '?adaptive=no&token=' + token
-    stream_data = requests.get(data_url).json()
-
+    try:
+        auth_url = "https://ida.omroep.nl/app.php/auth"
+        auth_token_json = requests.get(auth_url).json()
+        token = auth_token_json["token"]
+    except IOError:
+        logging.log('Error', 'Could not fetch a token from ' + auth_url)
+        return None
+    try:
+        data_url = 'https://ida.omroep.nl/app.php/' + key + '?adaptive=no&token=' + token
+        stream_data = requests.get(data_url).json()
+    except IOError:
+        logging.log('Error', 'Could not fetch playlist url at ' + data_url)
+        return None
     return stream_data
 
 
@@ -84,13 +96,18 @@ def get_lineup(base_url):
     lineup = []
     basepath = path.dirname(__file__)
     filepath = path.abspath(path.join(basepath, "streams.json"))
-    with open(filepath, 'r') as streams:
-        stream_json = json.load(streams)
-        for d in stream_json:
-            if d['enabled']:
-                url = base_url + "/" + d['key']
-                lineup.append({'GuideNumber': str(d['number']),
-                               'GuideName': d['name'],
-                               'URL': url
-                               })
-    return lineup
+    try:
+        with open(filepath, 'r') as streams:
+            stream_json = json.load(streams)
+            for d in stream_json:
+                if d['enabled']:
+                    url = base_url + "/" + d['key']
+                    lineup.append({'GuideNumber': str(d['number']),
+                                   'GuideName': d['name'],
+                                   'URL': url
+                                   })
+        return lineup
+    except EnvironmentError:
+        logging.log('Error', 'Reading streams.json file failed. Make sure it is present in the npo directory, '
+                             'and of the correct format')
+        return []

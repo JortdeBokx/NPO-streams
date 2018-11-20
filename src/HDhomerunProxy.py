@@ -5,6 +5,8 @@ from .NPOstream import get_lineup as get_npo_lineup
 bp = Blueprint('HDHomerunProxy', __name__)
 
 
+# Code similar to https://github.com/jkaberg/tvhProxy
+
 @bp.route('/discover.json')
 def discover():
     discover_data = {

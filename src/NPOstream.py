@@ -1,9 +1,9 @@
 import subprocess
+import logging
 import time
-import json
 
 from os import path
-from flask import stream_with_context, Response, Blueprint, abort, request
+from flask import stream_with_context, Response, Blueprint, abort, request, json
 from src.npo import npo
 
 URL_PREFIX = "NPOstream"
@@ -14,9 +14,14 @@ bp = Blueprint('NPOstream', __name__, url_prefix="/" + URL_PREFIX)
 def valid_key(key):
     basepath = path.dirname(__file__)
     filepath = path.abspath(path.join(basepath, "npo", "streams.json"))
-    with open(filepath, 'r') as streams:
-        stream_json = json.load(streams)
-        return any(d['key'] == key for d in stream_json)
+    try:
+        with open(filepath, 'r') as streams:
+            stream_json = json.load(streams)
+            return any(d['key'] == key for d in stream_json)
+    except EnvironmentError:
+        logging.log('Error', 'Reading streams.json file failed. Make sure it is present in the npo directory, '
+                             'and of the correct format')
+        return False
 
 
 def get_lineup():
@@ -31,7 +36,7 @@ def stream_stuff(key):
     def generate():
         startTime = time.time()
         buffer = []
-        sentBurst = False
+        Transmitted = False
 
         stream_url = npo.get_live_m3u8(str(key), quality=0)
         ffmpeg_command = ["ffmpeg", "-i", stream_url, "-c:v", "copy", "-c:a", "copy", "-f", "mpegts",
@@ -40,15 +45,11 @@ def stream_stuff(key):
         process = subprocess.Popen(ffmpeg_command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, bufsize=-1)
 
         while True:
-            # Get some data from ffmpeg
-            line = process.stdout.read(1024)
+            data = process.stdout.read(1024)
+            buffer.append(data)
 
-            # We buffer everything before outputting it
-            buffer.append(line)
-
-            # Minimum buffer time, 3 seconds
-            if sentBurst is False and time.time() > startTime + 3 and len(buffer) > 0:
-                sentBurst = True
+            if Transmitted is False and time.time() > startTime + 3 and len(buffer) > 0:
+                Transmitted = True
 
                 for i in range(0, len(buffer) - 2):
                     yield buffer.pop(0)
@@ -58,7 +59,7 @@ def stream_stuff(key):
 
             process.poll()
             if isinstance(process.returncode, int):
+                logging.log('Error', 'FFmpeg has crached')
                 break
 
     return Response(stream_with_context(generate()), mimetype="video/mp2t")
-
