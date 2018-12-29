@@ -8,9 +8,20 @@ def generate_stream_ffmpeg(stream_url):
     buffer = []
     Transmitted = False
 
-    ffmpeg_command = ["ffmpeg", "-i", stream_url, "-c:v", "copy", "-c:a", "copy", "-f", "mpegts",
-                      "-preset", "ultrafast", "-tune", "zerolatency",
-                      "-movflags", "faststart", "pipe:stdout"]
+    # TODO: make this smoother and better in all ways
+    # Look at how tvheadend does it
+    # https://trac.ffmpeg.org/wiki/StreamingGuide
+
+    ffmpeg_command = ["ffmpeg",
+                      "-i", stream_url,
+                      "-c:v", "copy",
+                      "-c:a", "copy",
+                      "-f", "mpegts",
+                      "-preset", "ultrafast",
+                      "-blocksize", "1024",
+                      # "-tune", "zerolatency",
+                      # "-movflags", "faststart",
+                      "pipe:stdout"]
     process = subprocess.Popen(ffmpeg_command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, bufsize=-1)
 
     while True:
