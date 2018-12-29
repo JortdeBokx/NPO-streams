@@ -23,7 +23,7 @@ def generate_stream_ffmpeg(stream_url):
             byte = f.read(512)
 
     except Exception:
-        print("Error: ")
+        print("An Exception occurred with ffmpeg")
         process.kill()
     finally:
         process.kill()
