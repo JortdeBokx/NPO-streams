@@ -14,7 +14,6 @@ def generate_stream_ffmpeg(stream_url):
                       # "-movflags", "faststart",
                       "pipe:stdout"]
     process = subprocess.Popen(ffmpeg_command, stdout=subprocess.PIPE, stderr=open(os.devnull, 'w'))
-    print(process.pid)
     try:
         f = process.stdout
         byte = f.read(512)
