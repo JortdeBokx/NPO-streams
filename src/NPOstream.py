@@ -3,7 +3,7 @@ import logging
 from os import path
 from flask import stream_with_context, Response, Blueprint, abort, request, json
 from src.npo import npo
-from .Helpers import generate_stream_ffmpeg
+from src.util.Helpers import generate_stream_ffmpeg
 
 URL_PREFIX = "NPOstream"
 
