@@ -1,0 +1,11 @@
+[Unit]
+Description=An NPO Streams listener
+
+[Service]
+Environment=
+WorkingDirectory=
+ExecStart=/path/to/npo-streams/ /path/to/npo-streams/src
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
