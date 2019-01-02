@@ -3,8 +3,8 @@ Description=An NPO Streaming proxy for Emby and Plex media servers
 
 [Service]
 Environment=
-WorkingDirectory=/path/to/npo-streams
-ExecStart=/usr/local/bin/pipenv run /path/to/npo-streams/npo-streams.py
+WorkingDirectory=/path/to/NPO-streams
+ExecStart=/usr/local/bin/pipenv run /path/to/NPO-streams/npo-streams.py
 Restart=always
 
 [Install]
