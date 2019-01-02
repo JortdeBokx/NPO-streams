@@ -1,5 +1,4 @@
 requests
 m3u8
-ffmpeg-python
 flask
 jsonschema

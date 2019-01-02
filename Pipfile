@@ -8,7 +8,6 @@ verify_ssl = true
 [packages]
 requests = "*"
 m3u8 = "*"
-ffmpeg-python = "*"
 jsonschema = "*"
 Flask = "*"
 
