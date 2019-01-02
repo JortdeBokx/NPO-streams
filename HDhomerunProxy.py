@@ -3,7 +3,7 @@ import logging
 from flask import jsonify, request, abort, Response, stream_with_context
 
 # Code similar to https://github.com/jkaberg/tvhProxy
-from src.util.Helpers import generate_stream_ffmpeg
+from util.Helpers import generate_stream_ffmpeg
 
 
 def setup_hdhrproxy(app, stream_handlers):

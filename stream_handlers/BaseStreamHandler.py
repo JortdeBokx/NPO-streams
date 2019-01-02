@@ -4,13 +4,13 @@ from os import path
 
 import jsonschema
 
-from src.util import json_schemas
+from util import json_schemas
 
 
 class BaseStreamHandler:
     config_path = path.abspath(
-        path.join(path.dirname(path.dirname(path.dirname(__file__))), "config",
-                  "streams.json"))  # ../../config/streams.json
+        path.join(path.dirname(path.dirname(__file__)), "config",
+                  "streams.json"))  # ../config/streams.json
 
     def __init__(self):
         # Validate config layout

@@ -4,7 +4,7 @@ import re
 import m3u8
 import requests
 
-from src.stream_handlers.BaseStreamHandler import BaseStreamHandler
+from stream_handlers.BaseStreamHandler import BaseStreamHandler
 
 NPO_IDA_APP_URI = 'https://ida.omroep.nl/app.php/'
 NPO_AUTH_URL = "https://ida.omroep.nl/app.php/auth"
