@@ -4,7 +4,7 @@ Description=An NPO Streams listener
 [Service]
 Environment=
 WorkingDirectory=/path/to/npo-streams
-ExecStart=/usr/local/bin/pipenv run /path/to/npo-streams/src/npo-streams.py
+ExecStart=/usr/local/bin/pipenv run /path/to/npo-streams/npo-streams.py
 Restart=always
 
 [Install]
