@@ -18,7 +18,7 @@ I recommend using pipenv to install the required dependencies;
 2.  Make sure you have FFMPEG installed, see https://www.ffmpeg.org/download.html for more information 
 2.  Install pipenv `pip install pipenv`
 3.  Clone this repo into a directory `git clone https://github.com/JortdeBokx/NPO-streams.git`, you can also download and unpack the zip
-4.  Change directory to the downloaded folder `cd npo-streams`
+4.  Change directory to the downloaded folder `cd NPO-streams`
 5.  Create a pipenv usign `pipenv --python3.6` (you can also use python3.7)
 6.  Install the dependencies usign `pipenv install`
 7.  Copy the template configuration files using `cp config/config.json.default config/config.json` and `cp config/channels.json.default config/channels.json`
