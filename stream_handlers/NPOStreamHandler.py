@@ -140,12 +140,13 @@ class NPOStreamHandler(BaseStreamHandler):
             self.refresh_npo_api_token()
         try:
             data_url, stream_data = self.obtain_stream_url(key)
+        except TypeError:
+            if not self.token:
+                logging.log(logging.ERROR, 'Could not fetch NPO streaming token')
+            return None
         except IOError:
-            self.refresh_npo_api_token()
-            try:
-                data_url, stream_data = self.obtain_stream_url(key)
-            except IOError:
-                logging.log(logging.ERROR, 'Could not fetch playlist url at ' + data_url)
+            logging.log(logging.ERROR,
+                        'Error obtaining streaming data from ' + NPO_IDA_APP_URI + key + '?adaptive=no&token=')
             return None
 
         return stream_data

@@ -15,11 +15,8 @@ app.config.from_json(path.abspath(
     path.join(path.dirname(__file__), "config",
               "config.json")))  # ./config/config.json
 
-logging.basicConfig(format='%(asctime)s - %(message)s', level=logging.ERROR)
-logger = logging.getLogger(__name__)
-fh = logging.FileHandler('errors.log')
-fh.setLevel(logging.ERROR)
-logger.addHandler(fh)
+logging.basicConfig(format='%(asctime)s - %(message)s', filename='errors.log', filemode='w',
+                    level=logging.ERROR)
 
 stream_handlers = []
 npo = NPOStreamHandler()
