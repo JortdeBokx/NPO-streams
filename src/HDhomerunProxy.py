@@ -1,3 +1,5 @@
+import logging
+
 from flask import jsonify, request, abort, Response, stream_with_context
 
 # Code similar to https://github.com/jkaberg/tvhProxy
@@ -9,7 +11,8 @@ def setup_hdhrproxy(app, stream_handlers):
     for sh in stream_handlers:
         name = sh.__class__.__name__
         lineup += sh.get_lineup("http://" + app.config["HOST"] + ":" + str(app.config["PORT"]) + "/" + name)
-    print(lineup)
+
+    logging.info('Lineup: ' + str(lineup))
 
     @app.route('/<class_name>/<key>')
     def stream_stuff(class_name, key):

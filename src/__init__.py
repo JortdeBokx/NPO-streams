@@ -3,7 +3,7 @@ from os import path
 from flask import Flask
 
 from src.stream_handlers.NPOStreamHandler import NPOStreamHandler
-from . import HDhomerunProxy, NPOstream
+from . import HDhomerunProxy
 
 app = Flask(__name__)
 app.config["DEBUG"] = False
