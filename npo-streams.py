@@ -2,6 +2,7 @@ import logging
 from os import path
 
 from flask import Flask
+from gevent.pywsgi import WSGIServer
 
 import HDhomerunProxy
 from stream_handlers.NPOStreamHandler import NPOStreamHandler
@@ -24,4 +25,6 @@ stream_handlers.append(npo)
 
 HDhomerunProxy.setup_hdhrproxy(app, stream_handlers)
 
-app.run(host=app.config["HOST"], port=app.config["PORT"])
+if __name__ == '__main__':
+    http = WSGIServer((app.config['HOST'], app.config["PORT"]), app.wsgi_app)
+    http.serve_forever()

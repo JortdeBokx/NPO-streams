@@ -2,3 +2,4 @@ requests
 m3u8
 flask
 jsonschema
+gevent

@@ -10,6 +10,7 @@ requests = "*"
 m3u8 = "*"
 jsonschema = "*"
 Flask = "*"
+gevent = "*"
 
 [requires]
 python_version = "3.6"
