@@ -79,6 +79,7 @@ class NPOStreamHandler(BaseStreamHandler):
 
         m3u8_location = self.get_live_url(key)
         if m3u8_location:
+
             m3u8_obj = m3u8.load(m3u8_location)
             Base_URI = m3u8_obj.base_uri
 
