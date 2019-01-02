@@ -112,16 +112,20 @@ class NPOStreamHandler(BaseStreamHandler):
         stream_data = self.get_stream_data(key)
         selected_stream = ""
         if stream_data:
-            for streams in stream_data['items']:
-                for stream in streams:
-                    if stream['contentType'] == "live":
-                        selected_stream = stream['url']
-                        break
-            if selected_stream:
-                stream_url = requests.get(selected_stream).text
-                stream_url = stream_url.split('"')[1]
-                stream_url = re.sub(r"\\", '', stream_url)
-                return stream_url
+            try:
+                for streams in stream_data['items']:
+                    for stream in streams:
+                        if stream['contentType'] == "live":
+                            selected_stream = stream['url']
+                            break
+                if selected_stream:
+                    stream_url = requests.get(selected_stream).text
+                    stream_url = stream_url.split('"')[1]
+                    stream_url = re.sub(r"\\", '', stream_url)
+                    return stream_url
+            except KeyError:
+                logging.log(logging.ERROR, "Data stream contained no content")
+                return None
         else:
             return None
 

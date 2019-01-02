@@ -26,7 +26,9 @@ def setup_hdhrproxy(app, stream_handlers):
             abort(404)
 
         stream_url = sh.get_live_m3u8(str(key), quality=app.config["QUALITY"])
-
+        if not stream_url:
+            logging.error("Could not get stream url")
+            abort(404)
         return Response(stream_with_context(generate_stream_ffmpeg(stream_url)), mimetype="video/mp2t")
 
     @app.route('/discover.json')
