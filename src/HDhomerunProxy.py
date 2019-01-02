@@ -8,7 +8,7 @@ def setup_hdhrproxy(app, stream_handlers):
     lineup = []
     for sh in stream_handlers:
         name = sh.__class__.__name__
-        lineup += sh.get_lineup(app.config["HOST"] + ":" + str(app.config["PORT"]) + "/" + name)
+        lineup += sh.get_lineup("http://" + app.config["HOST"] + ":" + str(app.config["PORT"]) + "/" + name)
     print(lineup)
 
     @app.route('/<class_name>/<key>')
@@ -22,7 +22,7 @@ def setup_hdhrproxy(app, stream_handlers):
         if not sh.valid_key(key):
             abort(404)
 
-        stream_url = sh.get_live_m3u8(str(key), quality=0)
+        stream_url = sh.get_live_m3u8(str(key), quality=app.config["QUALITY"])
 
         return Response(stream_with_context(generate_stream_ffmpeg(stream_url)), mimetype="video/mp2t")
 
@@ -52,7 +52,7 @@ def setup_hdhrproxy(app, stream_handlers):
         })
 
     @app.route('/lineup.json')
-    def lineup():
+    def give_lineup():
         return jsonify(lineup)
 
     @app.route('/lineup.post', methods=['GET', 'POST'])
