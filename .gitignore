@@ -2,3 +2,7 @@
 .idea/*
 config/config.json
 config/streams.json
+
+# Pipenv
+Pipfile
+Pipfile.lock

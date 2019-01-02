@@ -3,8 +3,8 @@ Description=An NPO Streams listener
 
 [Service]
 Environment=
-WorkingDirectory=
-ExecStart=/path/to/npo-streams/ /path/to/npo-streams/src
+WorkingDirectory=/path/to/npo-streams
+ExecStart=/usr/local/bin/pipenv run /path/to/npo-streams/src/npo-streams.py
 Restart=always
 
 [Install]
