@@ -37,6 +37,8 @@ The configuration is split into 2 files
 This file contains the general configuration of the flask app. Any flask configuration entries can be placed here, see [the flask documentation](http://flask.pocoo.org/docs/1.0/config/) for more info
 You can change the port and host to allow access from outside the machine.
 
+You can also specify a quality number, this number can be 0 for the maximum quality, or an amount of vertical pixels, if that amount is available (see the gear icon on the npo player for avaiable qualities)
+
 ### channels.json
 This file contains all the channels available. They are grouped by the class name of the stream handler that handle's their streams (this is to allow future expandibility)
 Each channel consists of 4 attrbutes: a number (this must be unique), a name, a key (unique identification for streaming service) and a flag to enable/disable specific channels.
