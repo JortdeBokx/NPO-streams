@@ -51,3 +51,6 @@ Please check the [Contributing Guidelines](https://github.com/JortdeBokx/NPO-str
 ## License
 All content is released under the MIT license, see [LICENSE](https://github.com/JortdeBokx/NPO-streams/blob/master/LICENSE) for more information.
 
+## Help needed
+If you need any help installing/running/configuring/altering this project don't hesitate to contact me by creating an issue, or sending me an email.
+
