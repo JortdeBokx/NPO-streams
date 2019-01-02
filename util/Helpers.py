@@ -11,7 +11,7 @@ def generate_stream_ffmpeg(stream_url):
                       "-f", "mpegts",
                       "-preset", "ultrafast",
                       # "-blocksize", "1024",
-                      "-tune", "zerolatency",
+                      # "-tune", "zerolatency",
                       "-movflags", "faststart",
                       "pipe:stdout"]
     process = subprocess.Popen(ffmpeg_command, stdout=subprocess.PIPE, stderr=open(os.devnull, 'w'))
