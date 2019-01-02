@@ -18,10 +18,11 @@ I recommend using pipenv to install the required dependencies;
 2.  Make sure you have FFMPEG installed, see https://www.ffmpeg.org/download.html for more information 
 2.  Install pipenv `pip install pipenv`
 3.  Clone this repo into a directory `git clone https://github.com/JortdeBokx/NPO-streams.git`, you can also download and unpack the zip
-4.  Create a pipenv usign `pipenv --python3.6` (you can also use python3.7)
-5.  Install the dependencies usign `pipenv install`
-6.  Copy the template configuration files using `cp config/config.json.default config/config.json` and `cp config/channels.json.default config/channels.json`
-6.  You can verify the app works by running `pipenv run python npo-streams.py`, if you go to `localhost:5004` you should get a response from the server.
+4.  Change directory to the downloaded folder `cd npo-streams`
+5.  Create a pipenv usign `pipenv --python3.6` (you can also use python3.7)
+6.  Install the dependencies usign `pipenv install`
+7.  Copy the template configuration files using `cp config/config.json.default config/config.json` and `cp config/channels.json.default config/channels.json`
+8.  You can verify the app works by running `pipenv run python npo-streams.py`, if you go to `localhost:5004` you should get a response from the server.
 
 If you want to run NPO streams as a systemd service, I included a template service file.
 You should edit this file such that the paths match the installation location. 
