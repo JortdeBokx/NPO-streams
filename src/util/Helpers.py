@@ -1,3 +1,4 @@
+import logging
 import os
 import subprocess
 
@@ -8,10 +9,10 @@ def generate_stream_ffmpeg(stream_url):
                       "-c:v", "copy",
                       "-c:a", "copy",
                       "-f", "mpegts",
-                       "-preset", "ultrafast",
+                      "-preset", "ultrafast",
                       # "-blocksize", "1024",
-                       "-tune", "zerolatency",
-                      # "-movflags", "faststart",
+                      "-tune", "zerolatency",
+                      "-movflags", "faststart",
                       "pipe:stdout"]
     process = subprocess.Popen(ffmpeg_command, stdout=subprocess.PIPE, stderr=open(os.devnull, 'w'))
     try:
@@ -21,8 +22,8 @@ def generate_stream_ffmpeg(stream_url):
             yield byte
             byte = f.read(512)
 
-    except Exception:
-        print("An Exception occurred with ffmpeg")
+    except Exception as e:
+        logging.log('Error', 'An Exception occurred with ffmpeg: ' + str(e))
         process.kill()
     finally:
         process.kill()
