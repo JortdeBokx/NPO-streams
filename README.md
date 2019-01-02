@@ -26,7 +26,7 @@ I recommend using pipenv to install the required dependencies;
 
 If you want to run NPO streams as a systemd service, I included a template service file.
 You should edit this file such that the paths match the installation location. 
-After that copy the file to `/etc/systemd/system/` and run `service npo-streams.service enable` to enable the service on startup
+After that copy the file to `/etc/systemd/system/` and run `systemctl enable NPOstreams.service` to enable the service on startup
 
 In Emby or Plex you can now add a new tv tuner by entering the ip of the proxy as well as the port.
 
