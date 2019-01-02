@@ -1,5 +1,5 @@
-# NPO streams
-Fetches Live tv streams from all Dutch public broadcast channels (Nederlandse publieke omroep), and restreams them behind a HDHomerun like proxy for use in Emby or Plex.
+# NPO-streams
+Fetches Live tv streams from all Dutch public broadcast channels (Nederlandse Publieke Omroep), and re-streams them as a HDHomerun for use in Emby or Plex.
 The Proxy runs as a small flask app.
 
 I made this application as I watch tv very rarely, and when I do don't want to use the npo website. Using this service you can stream the following channels:
@@ -9,7 +9,7 @@ I made this application as I watch tv very rarely, and when I do don't want to u
 *  NPO politiek
 *  NPO Radio 1,2,3,4 webcams
 
-More chanels could be added later. The channels are presented as a HDHomerun, which is a commonly used cable tv rebroadcaster for which Emby and Plex have nice support.
+More chanels could be added later. The channels are retransmitted as if they came from an HDHomerun, which is a commonly used cable tv rebroadcaster for which Emby and Plex have good support.
 
 ## Installation
 I recommend using pipenv to install the required dependencies;
@@ -17,7 +17,7 @@ I recommend using pipenv to install the required dependencies;
 1.  Make sure you have pip installed, on ubuntu/debian install with `apt install python-pip`
 2.  Make sure you have FFMPEG installed, see https://www.ffmpeg.org/download.html for more information 
 2.  Install pipenv `pip install pipenv`
-3.  Clone this repo into a directory `git clone <url>`, you can also download and unpack the zip
+3.  Clone this repo into a directory `git clone https://github.com/JortdeBokx/NPO-streams.git`, you can also download and unpack the zip
 4.  Create a pipenv usign `pipenv --python3.6` (you can also use python3.7)
 5.  Install the dependencies usign `pipenv install`
 6.  Copy the template configuration files using `cp config/config.json.default config/config.json` and `cp config/channels.json.default config/channels.json`
@@ -43,8 +43,8 @@ Each channel consists of 4 attrbutes: a number (this must be unique), a name, a 
 ## Contributing
 I very happily accept contributions to this project, 
 A lot can be done to improve the overal structure and add new features such as EPG, channel logos, etc...
-Please check the [Contributing Guidelines](Contributing.md) for more information.
+Please check the [Contributing Guidelines](https://github.com/JortdeBokx/NPO-streams/blob/master/CONTRIBUTING.md) for more information.
 
 ## License
-All content is released under the MIT license, see [License.md](example.com) for more information.
+All content is released under the MIT license, see [LICENSE](https://github.com/JortdeBokx/NPO-streams/blob/master/LICENSE) for more information.
 
