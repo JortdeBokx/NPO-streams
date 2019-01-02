@@ -126,6 +126,7 @@ class NPOStreamHandler(BaseStreamHandler):
                     return stream_url
             except KeyError:
                 logging.log(logging.ERROR, "Data stream contained no content")
+                logging.log(logging.DEBUG, "Data stream: " + str(stream_data))
                 return None
         else:
             return None
