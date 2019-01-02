@@ -23,7 +23,7 @@ def generate_stream_ffmpeg(stream_url):
             byte = f.read(512)
 
     except Exception as e:
-        logging.log('Error', 'An Exception occurred with ffmpeg: ' + str(e))
+        logging.log(logging.ERROR, 'An Exception occurred with ffmpeg: ' + str(e))
         process.kill()
     finally:
         process.kill()

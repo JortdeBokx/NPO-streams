@@ -35,7 +35,7 @@ class NPOStreamHandler(BaseStreamHandler):
         try:
             return any(d['key'] == key for d in self.streams)
         except TypeError:
-            logging.log('Error', 'Stream variable was not correctly set in NPO Stream Handler')
+            logging.log(logging.ERROR, 'Stream variable was not correctly set in NPO Stream Handler')
             return False
 
     def get_lineup(self, base_url):
@@ -55,7 +55,7 @@ class NPOStreamHandler(BaseStreamHandler):
 
             return lineup
         except TypeError:
-            logging.log('Error', 'No streams were loaded for NPO streamer, check the streams.json file')
+            logging.log(logging.ERROR, 'No streams were loaded for NPO streamer, check the streams.json file')
             return []
 
     def refresh_npo_api_token(self):
@@ -67,7 +67,7 @@ class NPOStreamHandler(BaseStreamHandler):
             auth_token_json = requests.get(NPO_AUTH_URL).json()
             self.token = auth_token_json["token"]
         except IOError:
-            logging.log('Error', 'Could not fetch a token from ' + NPO_AUTH_URL)
+            logging.log(logging.ERROR, 'Could not fetch a token from ' + NPO_AUTH_URL)
 
     def get_live_m3u8(self, key, quality=0):
         """
@@ -144,7 +144,7 @@ class NPOStreamHandler(BaseStreamHandler):
             try:
                 data_url, stream_data = self.obtain_stream_url(key)
             except IOError:
-                logging.log('Error', 'Could not fetch playlist url at ' + data_url)
+                logging.log(logging.ERROR, 'Could not fetch playlist url at ' + data_url)
             return None
 
         return stream_data
