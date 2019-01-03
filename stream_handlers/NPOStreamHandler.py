@@ -11,8 +11,6 @@ NPO_AUTH_URL = "https://ida.omroep.nl/app.php/auth"
 
 
 class NPOStreamHandler(BaseStreamHandler):
-    token = None
-
     def __init__(self):
         """
         Initialise NPO stream handler by Reading & verifying the config file
@@ -57,17 +55,6 @@ class NPOStreamHandler(BaseStreamHandler):
         except TypeError:
             logging.log(logging.ERROR, 'No streams were loaded for NPO streamer, check the streams.json file')
             return []
-
-    def refresh_npo_api_token(self):
-        """
-        Fetch an API token for the NPO streaming site
-        :return:
-        """
-        try:
-            auth_token_json = requests.get(NPO_AUTH_URL).json()
-            self.token = auth_token_json["token"]
-        except IOError:
-            logging.log(logging.ERROR, 'Could not fetch a token from ' + NPO_AUTH_URL)
 
     def get_live_m3u8(self, key, quality=0):
         """
@@ -137,18 +124,24 @@ class NPOStreamHandler(BaseStreamHandler):
         :param key: The key of the livestream, from streams.json
         :return: Json object with stream data
         """
-        if not self.token:
-            self.refresh_npo_api_token()
         try:
-            data_url = NPO_IDA_APP_URI + key + '?adaptive=no&token=' + self.token
+            auth_token_json = requests.get(NPO_AUTH_URL).json()
+            token = auth_token_json["token"]
+        except IOError:
+            logging.log(logging.ERROR, 'Could not fetch a token from ' + NPO_AUTH_URL)
+
+        try:
+            data_url = NPO_IDA_APP_URI + key + '?adaptive=no&token=' + token
             stream_data = requests.get(data_url).json()
         except TypeError:
-            if not self.token:
+            if not token:
                 logging.log(logging.ERROR, 'Could not fetch NPO streaming token')
             return None
         except IOError:
             logging.log(logging.ERROR,
                         'Error obtaining streaming data from ' + NPO_IDA_APP_URI + key + '?adaptive=no&token=')
             return None
+
+        if "error" in stream_data:
 
         return stream_data
