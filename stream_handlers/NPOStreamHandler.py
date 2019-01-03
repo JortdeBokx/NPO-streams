@@ -140,7 +140,8 @@ class NPOStreamHandler(BaseStreamHandler):
         if not self.token:
             self.refresh_npo_api_token()
         try:
-            data_url, stream_data = self.obtain_stream_url(key)
+            data_url = NPO_IDA_APP_URI + key + '?adaptive=no&token=' + self.token
+            stream_data = requests.get(data_url).json()
         except TypeError:
             if not self.token:
                 logging.log(logging.ERROR, 'Could not fetch NPO streaming token')
@@ -151,8 +152,3 @@ class NPOStreamHandler(BaseStreamHandler):
             return None
 
         return stream_data
-
-    def obtain_stream_url(self, key):
-        data_url = NPO_IDA_APP_URI + key + '?adaptive=no&token=' + self.token
-        stream_data = requests.get(data_url).json()
-        return data_url, stream_data
