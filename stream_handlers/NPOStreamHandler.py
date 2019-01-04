@@ -143,5 +143,7 @@ class NPOStreamHandler(BaseStreamHandler):
             return None
 
         if "error" in stream_data:
+            logging.log(logging.ERROR, "Error with stream data: " + str(stream_data))
+            return None
 
         return stream_data
