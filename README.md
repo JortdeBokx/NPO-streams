@@ -1,5 +1,5 @@
 # NPO-streams
-Fetches Live tv streams from all Dutch public broadcast channels (Nederlandse Publieke Omroep), and re-streams them as a HDHomerun for use in Emby or Plex.
+Fetches Live tv streams from all Dutch public broadcast channels (Nederlandse Publieke Omroep), and re-streams them, whilst also providing an HDHomerun emulation for use in Emby or Plex.
 The Proxy runs as a small flask app.
 
 I made this application as I watch tv very rarely, and when I do don't want to use the npo website. Using this service you can stream the following channels:
